@@ -3,14 +3,13 @@ argocd:
 
   server:
     service:
-      annotations: {}
+      annotations:
       type: ClusterIP
     ingress:
       ingressClassName: nginx
       enabled: false
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
-        nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
       tls:
         - secretName: argocd-tls
           hosts:
