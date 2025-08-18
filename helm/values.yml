@@ -1,0 +1,31 @@
+argocd:
+  installCRDs: true
+
+  server:
+    service:
+      annotations: {}
+      type: ClusterIP
+    ingress:
+      enabled: false
+      annotations:
+        nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
+        nginx.ingress.kubernetes.io/ssl-redirect: "true"
+      ingressClassName: nginx
+      tls:
+        - secretName: argocd-tls
+          hosts:
+            - argocd.home.lab
+      hosts:
+        - "argocd.home.lab"
+
+  configs:
+    cm:
+      url: https://argocd.home.lab
+
+  # No Dex by default; enable later if you want SSO.
+  dex:
+    enabled: false
+
+  # ApplicationSet is part of Argo CD; leave it enabled for GitOps repos.
+  applicationSet:
+    enabled: true
