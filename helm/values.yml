@@ -6,11 +6,10 @@ argocd:
       annotations: {}
       type: ClusterIP
     ingress:
+      ingressClassName: nginx
       enabled: false
       annotations:
-        nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
-        nginx.ingress.kubernetes.io/ssl-redirect: "true"
-      ingressClassName: nginx
+        cert-manager.io/cluster-issuer: letsencrypt
       tls:
         - secretName: argocd-tls
           hosts:
