@@ -1,7 +1,6 @@
 apiVersion: v2
 name: argocd-deploy
 type: application
-description: Wrapper Helm chart for customizing and deploying Argo CD
 
 # Follow Semantic Versioning (https://semver.org/)
 version: 1.0.0-8.3.0
