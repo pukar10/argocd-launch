@@ -1,0 +1,45 @@
+{{- if .Values.selfManage.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ .Values.selfManage.app.name | default "argocd" }}
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    helm.sh/resource-policy: keep
+    argocd.argoproj.io/sync-options: ApplyOutOfSyncOnly=true
+spec:
+  project: {{ .Values.selfManage.app.project | default "default" }}
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: {{ .Release.Namespace }}
+
+  {{- if and .Values.selfManage.git.enabled (not .Values.selfManage.helm.enabled) }}
+  source:
+    repoURL: {{ .Values.selfManage.git.repoURL | quote }}
+    targetRevision: {{ .Values.selfManage.git.targetRevision | quote }}
+    path: {{ .Values.selfManage.git.path | quote }}
+    helm:
+      {{- if .Values.selfManage.git.valueFiles }}
+      valueFiles:
+        {{- range .Values.selfManage.git.valueFiles }}
+        - {{ . | quote }}
+        {{- end }}
+      {{- end }}
+  {{- end }}
+
+  {{- if and .Values.selfManage.helm.enabled (not .Values.selfManage.git.enabled) }}
+  source:
+    repoURL: {{ .Values.selfManage.helm.repoURL | quote }}
+    chart: {{ .Values.selfManage.helm.chart | quote }}
+    targetRevision: {{ .Values.selfManage.helm.targetRevision | quote }}
+    helm:
+      {{- with .Values.selfManage.helm.values }}
+      values: |-
+{{ toYaml . | indent 8 }}
+      {{- end }}
+  {{- end }}
+
+  syncPolicy:
+    automated: { prune: true, selfHeal: true }
+    syncOptions: [CreateNamespace=true, ApplyOutOfSyncOnly=true]
+{{- end }}

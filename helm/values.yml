@@ -1,6 +1,8 @@
 argocd:
   crds:
     install: true
+  applicationSet:
+    enabled: true
   server:
     service:
       type: ClusterIP
@@ -21,9 +23,7 @@ argocd:
       application.instanceLabelKey: "argocd.argoproj.io/instance"
     rbac:
       policy.csv: |
-        g, your-org:platform, role:admin
+        u, psubedi, role:admin
       policy.default: role:readonly
   dex:
-    enabled: true
-  applicationSet:
     enabled: true
