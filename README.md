@@ -4,9 +4,9 @@ Wrapper helm chart repo for ArgoCD
 ## Quick Start
 
 ```
-helm upgrade -i argocd argocd-deploy/charts/argocd-deploy \
+helm upgrade -i argocd helm/ \
   -n argocd --create-namespace \
-  -f argocd-deploy/local/values-homelab.yaml \
+  -f helm/values.yml \
   --dependency-update
   --wait
 ```
