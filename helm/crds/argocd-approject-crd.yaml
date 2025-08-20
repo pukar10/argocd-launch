@@ -1,11 +1,6 @@
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
-  annotations:
-    meta.helm.sh/release-name=argocd
-    meta.helm.sh/release-namespace=argocd
-  labels:
-    app.kubernetes.io/managed-by=Helm
   name: appprojects.argoproj.io
 spec:
   group: argoproj.io
