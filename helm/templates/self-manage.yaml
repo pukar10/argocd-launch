@@ -5,6 +5,9 @@ metadata:
   name: {{ .Values.selfManage.app.name | default "argocd" }}
   namespace: {{ .Release.Namespace }}
   annotations:
+    helm.sh/hook: post-install,post-upgrade
+    helm.sh/hook-weight: "10"
+    helm.sh/hook-delete-policy: before-hook-creation
     helm.sh/resource-policy: keep
     argocd.argoproj.io/sync-options: ApplyOutOfSyncOnly=true
 spec:
@@ -40,6 +43,10 @@ spec:
   {{- end }}
 
   syncPolicy:
-    automated: { prune: true, selfHeal: true }
-    syncOptions: [CreateNamespace=true, ApplyOutOfSyncOnly=true]
+    automated: 
+      prune: true
+      selfHeal: true
+    syncOptions:
+      CreateNamespace=true, 
+      ApplyOutOfSyncOnly=true
 {{- end }}

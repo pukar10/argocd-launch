@@ -6,38 +6,30 @@ argo-cd:
   server:
     service:
       type: ClusterIP
-      annotations: {}
     ingress:
-      enabled: false
+      enabled: false          # ?ingress + TLS
       ingressClassName: nginx
-      annotations: {}
-  controller:
-    resources:
-      requests:
-        cpu: 50m
-        memory: 256Mi
   configs:
     params:
-      "server.insecure": "true"
+      "server.insecure": "true"  # ?false
     cm:
       application.instanceLabelKey: "argocd.argoproj.io/instance"
     rbac:
+      policy.default: role:readonly
       policy.csv: |
         u, psubedi, role:admin
-      policy.default: role:readonly
   dex:
     enabled: true
 
 selfManage:
   enabled: false
-  git:
-    enabled: true
-    repoURL: https://github.com/pukar10/argocd-deploy.git
-    targetRevision: initial
-    path: helm
-    valueFiles: []
-  helm:
-    enabled: false
   app:
     name: argocd
     project: default
+  git:
+    enabled: false                  # set true when you have a repo ready
+    repoURL: https://github.com/your-org/your-repo.git
+    targetRevision: main
+    path: path/to/apps/argocd
+    valueFiles: []
+
