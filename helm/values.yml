@@ -32,10 +32,10 @@ selfManage:
   enabled: false
   git:
     enabled: true
-    repoURL: https://github.com/YOUR_ORG/argocd-deploy.git
-    targetRevision: main
+    repoURL: https://github.com/pukar10/argocd-deploy.git
+    targetRevision: initial
     path: charts/argocd-deploy
-    valueFiles: []           # leave empty by default
+    valueFiles: []
   helm:
     enabled: false
   app:
