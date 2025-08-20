@@ -6,8 +6,8 @@ Wrapper helm chart repo for ArgoCD
 ```
 helm upgrade -i argocd helm/ \
   -n argocd --create-namespace \
-  -f helm/local/values.yml \
-  --dependency-update
+  -f helm/ \
+  --dependency-update \
   --wait
 
 helm uninstall argocd -n argocd

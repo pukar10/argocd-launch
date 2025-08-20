@@ -5,7 +5,7 @@ selfManage:
     enabled: true
     repoURL: https://github.com/pukar10/argocd-deploy.git
     targetRevision: initial
-    path: helm/
+    path: ../
     valueFiles: []
   helm:
     enabled: false
