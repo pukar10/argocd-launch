@@ -34,7 +34,7 @@ selfManage:
     enabled: true
     repoURL: https://github.com/pukar10/argocd-deploy.git
     targetRevision: initial
-    path: charts/argocd-deploy
+    path: helm/
     valueFiles: []
   helm:
     enabled: false

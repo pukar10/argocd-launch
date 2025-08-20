@@ -3,9 +3,9 @@ selfManage:
   enabled: true
   git:
     enabled: true
-    repoURL: https://github.com/YOUR_ORG/argocd-deploy.git
+    repoURL: https://github.com/pukar10/argocd-deploy.git
     targetRevision: main
-    path: charts/argocd-deploy
+    path: helm/
     valueFiles:
       - ../../local/values-homelab.yaml
   helm:
