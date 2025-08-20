@@ -1,5 +1,4 @@
 # Cluster specific local overrides
-
 selfManage:
   enabled: true
   git:
