@@ -4,10 +4,9 @@ selfManage:
   git:
     enabled: true
     repoURL: https://github.com/pukar10/argocd-deploy.git
-    targetRevision: main
+    targetRevision: initial
     path: helm/
-    valueFiles:
-      - ../../local/values-homelab.yaml
+    valueFiles: []
   helm:
     enabled: false
   app:

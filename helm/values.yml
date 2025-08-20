@@ -1,4 +1,4 @@
-argocd:
+argo-cd:
   crds:
     install: true
   applicationSet:
@@ -34,7 +34,7 @@ selfManage:
     enabled: true
     repoURL: https://github.com/pukar10/argocd-deploy.git
     targetRevision: initial
-    path: helm/
+    path: helm
     valueFiles: []
   helm:
     enabled: false
