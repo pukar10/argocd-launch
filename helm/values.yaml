@@ -26,9 +26,7 @@ selfManage:
     name: argocd
     project: default
   git:
-    enabled: false                  # set true when you have a repo ready
-    repoURL: https://github.com/your-org/your-repo.git
+    enabled: false
+    repoURL: https://github.com/pukar10/control-plane-launch.git
     targetRevision: main
-    path: path/to/apps/argocd
-    valueFiles: []
-
+    path: helm
