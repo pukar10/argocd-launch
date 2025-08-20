@@ -27,3 +27,17 @@ argocd:
       policy.default: role:readonly
   dex:
     enabled: true
+
+selfManage:
+  enabled: false
+  git:
+    enabled: true
+    repoURL: https://github.com/YOUR_ORG/argocd-deploy.git
+    targetRevision: main
+    path: charts/argocd-deploy
+    valueFiles: []           # leave empty by default
+  helm:
+    enabled: false
+  app:
+    name: argocd
+    project: default
