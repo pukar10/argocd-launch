@@ -9,10 +9,21 @@ argocd:
       enabled: false
       ingressClassName: nginx
       annotations: {}
+  controller:
+    resources:
+      requests:
+        cpu: 50m
+        memory: 256Mi
   configs:
     params:
       "server.insecure": "true"
+    cm:
+      application.instanceLabelKey: "argocd.argoproj.io/instance"
+    rbac:
+      policy.csv: |
+        g, your-org:platform, role:admin
+      policy.default: role:readonly
   dex:
-    enabled: false
+    enabled: true
   applicationSet:
     enabled: true
