@@ -1,4 +1,8 @@
 # Cluster specific local overrides
+# argocd:
+#   server:
+#     ingress:
+#       ingressClassName: nginx
 selfManage:
   enabled: true
   git:

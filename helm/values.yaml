@@ -8,7 +8,6 @@ argo-cd:
       type: ClusterIP
     ingress:
       enabled: false          # ?ingress + TLS
-      ingressClassName: nginx
   configs:
     params:
       "server.insecure": "true"  # ?false
