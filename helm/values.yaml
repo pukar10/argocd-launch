@@ -16,6 +16,6 @@ argo-cd:
     rbac:
       policy.default: role:readonly
       policy.csv: |
-        u, psubedi, role:admin
+        g, psubedi, role:admin
   dex:
     enabled: true
