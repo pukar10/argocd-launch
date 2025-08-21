@@ -7,10 +7,10 @@ argo-cd:
     service:
       type: ClusterIP
     ingress:
-      enabled: false          # ?ingress + TLS
+      enabled: false          # Initially
   configs:
     params:
-      "server.insecure": "true"  # ?false
+      "server.insecure": "true"  # Initially
     cm:
       application.instanceLabelKey: "argocd.argoproj.io/instance"
     rbac:
@@ -19,14 +19,3 @@ argo-cd:
         u, psubedi, role:admin
   dex:
     enabled: true
-
-selfManage:
-  enabled: false
-  app:
-    name: argocd
-    project: default
-  git:
-    enabled: false
-    repoURL: https://github.com/pukar10/control-plane-launch.git
-    targetRevision: main
-    path: helm

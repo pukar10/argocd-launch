@@ -1,18 +1,1 @@
-# Cluster specific local overrides
-# argocd:
-#   server:
-#     ingress:
-#       ingressClassName: nginx
-selfManage:
-  enabled: true
-  git:
-    enabled: true
-    repoURL: https://github.com/pukar10/argocd-deploy.git
-    targetRevision: initial
-    path: helm
-    valueFiles: []
-  helm:
-    enabled: false
-  app:
-    name: argocd
-    project: default
+
