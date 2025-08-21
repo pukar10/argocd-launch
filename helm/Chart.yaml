@@ -1,0 +1,14 @@
+apiVersion: v2
+name: argocd-deploy
+type: application
+
+# Follow Semantic Versioning (https://semver.org/)
+version: 1.0.0-8.3.0
+
+# Version of application being deployed
+appVersion: 8.3.0
+
+dependencies:
+  - name: argo-cd
+    version: "8.3.0"
+    repository: "https://argoproj.github.io/argo-helm"

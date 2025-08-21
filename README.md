@@ -1,36 +1,28 @@
-# argocd-deploy
+# ArgoCD-deploy
 Wrapper helm chart repo for ArgoCD
 
-## Quick start
+## Quick Start
 
-```bash
-# 1) Add upstream repo once
-helm repo add argo https://argoproj.github.io/argo-helm
-helm repo update
+Deploy ArgoCD Helm chart
+```
+helm upgrade -i argocd helm/ \
+  -n argocd --create-namespace \
+  -f helm/local/values.yaml \
+  --dependency-update \
+  --wait
 
-# 2) From this directory, pull chart deps
-helm dependency update .
-
-# 3) Install into the 'argocd' namespace
-helm upgrade --install argocd . -n argocd --create-namespace
-
-# 4) Get the initial admin password
-kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
 ```
 
-## Tweaks
-
-If you prefer Ingress instead of LoadBalancer, set:
-```yaml
-argocd:
-server:
-service:
-type: ClusterIP
-ingress:
-enabled: true
-ingressClassName: nginx
-hosts: [ "argocd.home.lab" ]
+Access ArgoCD web GUI before deploying networking
 ```
-then upgrade with `-f your-values.yaml`.
+kubectl -n argocd port-forward svc/argocd-server 8080:80
 
-Pin the upstream chart version in `Chart.yaml` as needed.
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath='{.data.password}' | base64 -d; echo
+```
+
+Uninstall ArgoCD Helm chart
+```
+helm uninstall argocd -n argocd
+
+kubectl delete ns argocd
+```

@@ -1,0 +1,21 @@
+argo-cd:
+  crds:
+    install: true
+  applicationSet:
+    enabled: true
+  server:
+    service:
+      type: ClusterIP
+    ingress:
+      enabled: false          # Initially
+  configs:
+    params:
+      "server.insecure": "true"  # Initially
+    cm:
+      application.instanceLabelKey: "argocd.argoproj.io/instance"
+    rbac:
+      policy.default: role:readonly
+      policy.csv: |
+        g, psubedi, role:admin
+  dex:
+    enabled: true
