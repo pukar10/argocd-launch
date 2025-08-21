@@ -10,7 +10,6 @@ helm upgrade -i argocd helm/ \
   -f helm/local/values.yaml \
   --dependency-update \
   --wait
-
 ```
 
 Access ArgoCD web GUI before deploying networking
