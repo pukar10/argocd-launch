@@ -3,7 +3,7 @@ Wrapper helm chart repo for ArgoCD
 
 ## Quick Start
 
-Deploy ArgoCD Helm chart
+Deploy ArgoCD (Helm managed)
 ```
 helm upgrade -i argocd helm/ \
   -n argocd --create-namespace \
@@ -12,7 +12,17 @@ helm upgrade -i argocd helm/ \
   --wait
 ```
 
-Access ArgoCD web GUI before deploying networking
+Deploy ArgoCD (not managed by Helm)
+```
+helm dependency update helm/
+helm template argocd helm/ \
+  --include-crds \
+  -n argocd \
+  -f helm/local/values.yaml \
+  | kubectl apply -n argocd --create-namespace -f -
+```
+
+Access ArgoCD web GUI (pre-networking)
 ```
 Get Password
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath='{.data.password}' | base64 -d; echo
@@ -24,7 +34,7 @@ Port forward directly
 kubectl -n argocd port-forward deploy/argocd-server 8080:8080
 ```
 
-Uninstall ArgoCD Helm chart
+Uninstall ArgoCD
 ```
 helm uninstall argocd -n argocd
 
