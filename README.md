@@ -14,9 +14,9 @@ helm upgrade -i argocd helm/ \
 
 Access ArgoCD web GUI before deploying networking
 ```
-kubectl -n argocd port-forward svc/argocd-server 8080:80
-
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath='{.data.password}' | base64 -d; echo
+
+kubectl -n argocd port-forward svc/argocd-server 8080:80
 ```
 
 Uninstall ArgoCD Helm chart
