@@ -12,16 +12,6 @@ helm upgrade -i argocd helm/ \
   --wait
 ```
 
-Deploy ArgoCD (not managed by Helm)
-```
-helm dependency update helm/
-helm template argocd helm/ \
-  --include-crds \
-  -n argocd \
-  -f helm/local/values.yaml \
-  | kubectl apply -n argocd --create-namespace -f -
-```
-
 Access ArgoCD web GUI (pre-networking)
 ```
 Get Password
