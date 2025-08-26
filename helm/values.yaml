@@ -9,8 +9,13 @@ argo-cd:
       ingressClassName: nginx
       annotations:
         nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+      hosts: [ "argocd.lab" ]
+      tls:
+        - hosts: [ "argocd.lab" ]
+          secretName: argocd-tls
   configs:
     cm:
+      url: "https://argocd.lab"
       application.instanceLabelKey: "argocd.argoproj.io/instance"
 
   dex:
