@@ -4,18 +4,14 @@ argo-cd:
   applicationSet:
     enabled: true
   server:
-    service:
-      type: ClusterIP
     ingress:
-      enabled: false          # Initially
+      enabled: true
+      ingressClassName: nginx
+      annotations:
+        nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
   configs:
-    params:
-      "server.insecure": "true"  # Initially
     cm:
       application.instanceLabelKey: "argocd.argoproj.io/instance"
-    rbac:
-      policy.default: role:readonly
-      policy.csv: |
-        g, psubedi, role:admin
+
   dex:
     enabled: true
